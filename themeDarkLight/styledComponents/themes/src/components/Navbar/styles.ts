@@ -24,6 +24,11 @@ export const Header = styled.header<Props> `
     padding: 0rem 3rem;
 `
 
+export const Logo = styled.h1 `
+    font-weight: bold;
+    text-transform: uppercase;
+`
+
 export const UlList = styled.ul `
     display: flex;
     gap: 2.5rem;
@@ -39,5 +44,9 @@ export const ListItem = styled.li `
 
     &:hover {
         transform: scale(1.1);
+    }
+
+    &:active {
+        transform: scale(0.9);
     }
 `

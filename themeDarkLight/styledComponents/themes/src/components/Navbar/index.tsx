@@ -1,9 +1,9 @@
-import { Header , UlList , ListItem } from './styles'
+import { Header , UlList , ListItem ,Logo } from './styles'
 
 function Navbar() {
     return (
         <Header>
-            <h1>LOGO</h1>
+            <Logo>logo</Logo>
             <UlList>
                 <ListItem>Home</ListItem>
                 <ListItem>About</ListItem>
