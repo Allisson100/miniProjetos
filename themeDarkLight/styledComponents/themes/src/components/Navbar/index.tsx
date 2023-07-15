@@ -3,17 +3,20 @@ import { useState } from 'react'
 
 import Switch from 'react-switch'
 
+import {useSwitchState} from '../../services/store/useSwitchState'
 
 function Navbar() {
 
-    const [checked , setChecked] = useState(false)
+    const { switchState } = useSwitchState()
+    const { setSwitchState } = useSwitchState();    
+
+    const [checked , setChecked] = useState(switchState)
 
     function handleSwitchChange () {
         setChecked(!checked)
-    }
-
-    console.log(checked);
-    
+        setSwitchState(!checked)
+    } 
+ 
 
     return (
         <Header>
