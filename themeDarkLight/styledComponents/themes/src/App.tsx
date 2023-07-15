@@ -7,7 +7,8 @@ import theme from './styles/theme'
 
 function App() {
 
-  const newTheme: DefaultTheme = theme.dark
+  const wTheme = 'light'
+  const newTheme: DefaultTheme = theme[wTheme]
 
   return (
 

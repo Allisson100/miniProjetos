@@ -41,9 +41,10 @@ export const P = styled.p<Props> `
     text-indent: 40px;
 `
 
-export const UlList = styled.ul `
+export const UlList = styled.ul<Props> `
    list-style: square;
    text-align: left;
    list-style-position: inside;
-
+   font-size: 1.2rem;
+   color: ${({ theme }) => (theme.colors.textColor)};
 `

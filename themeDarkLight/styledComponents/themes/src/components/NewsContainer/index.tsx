@@ -11,16 +11,14 @@ function NewsContainer () {
             <P>
                 O bundle baseado no Los Angeles Thieves, que faz parte de 12 outros pacotes lançados pela Call of Duty League, pode ser comprado por 9 euros (no Brasil, sai por R$ 52 pela Steam).  Nele, o jogador ou jogadora tem os seguintes benefícios:
             </P>
-            <P>
-                <UlList>
-                    <li>Skin Masculina e Skin Feminina de Operador Em Casa e Fora</li>
-                    <li>Camuflagem de Arma</li>
-                    <li>Adesivo de Vinil</li>
-                    <li>Cartão de Visitas Animado</li>
-                    <li>Emblema</li>
-                    <li>Adesivo de Arma</li>
-                </UlList>                
-            </P>
+            <UlList>
+                <li>Skin Masculina e Skin Feminina de Operador Em Casa e Fora</li>
+                <li>Camuflagem de Arma</li>
+                <li>Adesivo de Vinil</li>
+                <li>Cartão de Visitas Animado</li>
+                <li>Emblema</li>
+                <li>Adesivo de Arma</li>
+            </UlList>                
             <P>
                 A princípio, não há nada errado na lista, mas a comunidade vem alegando que o tom excessivamente escuro da skin torna praticamente impossível visualizar o inimigo em determinadas condições no mapa.
             </P>
