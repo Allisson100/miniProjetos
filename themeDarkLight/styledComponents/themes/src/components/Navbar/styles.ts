@@ -1,6 +1,6 @@
 import {styled} from "styled-components";
 
-interface Props {
+export interface Props {
     theme: {
         colors: {
             mainColor: string;
@@ -14,8 +14,8 @@ export const Header = styled.header<Props> `
     width: 100%;
     height: 100px;
 
-    background-color: ${({ theme }: Props) => (theme.colors.mainColor)};
-    color: ${({ theme }: Props) => (theme.colors.textColor)};
+    background-color: ${({ theme }) => (theme.colors.mainColor)};
+    color: ${({ theme }) => (theme.colors.textColor)};
 
     display: flex;
     justify-content: space-between;

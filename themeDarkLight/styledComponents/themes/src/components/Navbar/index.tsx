@@ -1,6 +1,6 @@
 import { Header , UlList , ListItem } from './styles'
 
-const Navbar: React.FC = () => {
+function Navbar() {
     return (
         <Header>
             <h1>LOGO</h1>

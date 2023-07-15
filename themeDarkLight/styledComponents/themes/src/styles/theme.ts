@@ -1,8 +1,8 @@
 const theme = {
     light: {
         colors: {
-            mainColor: '#F7EDF0',
-            secundaryColor: '#F4CBC6',
+            mainColor: '#F4CBC6',
+            secundaryColor: '#F6D8D6',
             textColor: '#000000',
         },
     },
