@@ -4,10 +4,15 @@ import GlobalStyles from './styles/global'
 import { ThemeProvider , DefaultTheme } from 'styled-components'
 import theme from './styles/theme'
 
+import {useSwitchState} from './services/store/useSwitchState'
+
 
 function App() {
 
-  const wTheme = 'light'
+  const { switchState } = useSwitchState()
+
+  const wTheme = switchState ? 'dark' : 'light'
+  
   const newTheme: DefaultTheme = theme[wTheme]
 
   return (
