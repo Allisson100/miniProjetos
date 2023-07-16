@@ -5,9 +5,9 @@ import { SwitchContext } from '../../contexts/switch'
 
 import lapisIcon from '../../assets/img/lapis.png'
 import borrachaIcon from '../../assets/img/borracha.png'
-// import blackMoonIcon from '../../assets/icons/blackMoonIcon.png'
+import blackMoonIcon from '../../assets/icons/blackMoonIcon.png'
 import whiteMoonIcon from '../../assets/icons/whiteMoonIcon.png'
-// import blackSunIcon from '../../assets/icons/blackSunIcon.png'
+import blackSunIcon from '../../assets/icons/blackSunIcon.png'
 import whiteSunIcon from '../../assets/icons/whiteSunIcon.png'
 
 import Switch from 'react-switch'
@@ -27,7 +27,7 @@ function Navbar () {
             <IconContainer>
                 <PencilImage src={lapisIcon} alt="Lapis" />
                 <EraserImage src={borrachaIcon} alt="Borracha" />
-                <Image src={whiteSunIcon} alt="Sun Icon" />
+                <Image src={switchState ? whiteSunIcon : blackSunIcon} alt="Sun Icon" />
                 <Switch 
                     checked={switchState}
                     onChange={handleSwitchChange}
@@ -40,7 +40,7 @@ function Navbar () {
                     onColor={'#515661'}
                     onHandleColor={'#ffffff'}
                 />
-                <Image src={whiteMoonIcon} alt="Moon ICon" />
+                <Image src={switchState ? whiteMoonIcon : blackMoonIcon} alt="Moon ICon" />
             </IconContainer>
 
 

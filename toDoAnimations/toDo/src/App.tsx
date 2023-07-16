@@ -13,7 +13,6 @@ function App() {
   const [switchSate , setSwitchSate] = useState(true)
 
   function getSwitchState(value: boolean) {
-
     setSwitchSate(value)
   }
 
