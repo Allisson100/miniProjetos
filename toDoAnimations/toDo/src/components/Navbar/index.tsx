@@ -1,5 +1,7 @@
 import { Container , Logo , PencilImage , EraserImage , IconContainer , Image } from './styles'
-import { useState } from 'react'
+
+import { useContext } from 'react'
+import { SwitchContext } from '../../contexts/switch'
 
 import lapisIcon from '../../assets/img/lapis.png'
 import borrachaIcon from '../../assets/img/borracha.png'
@@ -12,10 +14,11 @@ import Switch from 'react-switch'
 
 function Navbar () {
 
-    const [checked , setChecked] = useState(true)
+    
+    const {switchState , setSwitchState} = useContext(SwitchContext)   
 
     function handleSwitchChange () {
-        setChecked(!checked)
+        setSwitchState(!switchState)        
     }
 
     return (
@@ -26,7 +29,7 @@ function Navbar () {
                 <EraserImage src={borrachaIcon} alt="Borracha" />
                 <Image src={whiteSunIcon} alt="Sun Icon" />
                 <Switch 
-                    checked={checked}
+                    checked={switchState}
                     onChange={handleSwitchChange}
                     checkedIcon={false}
                     uncheckedIcon={false}
