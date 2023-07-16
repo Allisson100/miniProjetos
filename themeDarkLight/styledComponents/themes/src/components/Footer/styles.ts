@@ -7,6 +7,7 @@ export const FooterContainer = styled.footer<Props> `
     height: 10%;
 
     background-color: ${({ theme }) => (theme.colors.mainColor)};
+    border-top: 2px solid white;
 
     padding: 2rem 2rem;
 

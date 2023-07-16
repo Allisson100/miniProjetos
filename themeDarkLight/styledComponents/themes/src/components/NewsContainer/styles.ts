@@ -2,8 +2,17 @@ import {styled} from "styled-components";
 
 import { Props } from '../Navbar/styles'
 
-
 export const Container = styled.main<Props> `
+    width: 100%;
+    height: 100%;
+
+    background-color: ${({ theme }) => (theme.colors.thirColor)};
+
+    padding: 4rem 0rem;
+`
+
+
+export const ContainerContent = styled.section<Props> `
     width: 80%;
     height: 100%;
 
@@ -14,7 +23,7 @@ export const Container = styled.main<Props> `
     flex-direction: column;
     gap: 2rem;
 
-    margin: 4rem auto 4rem auto;
+    margin: 0 auto 0 auto;
     padding: 1rem 2rem;
 
     border: 5px solid white;

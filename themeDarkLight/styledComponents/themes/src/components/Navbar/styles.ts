@@ -5,6 +5,7 @@ export interface Props {
         colors: {
             mainColor: string;
             secundaryColor: string;
+            thirColor: string;
             textColor: string;
         }
     }
@@ -16,6 +17,8 @@ export const Header = styled.header<Props> `
 
     background-color: ${({ theme }) => (theme.colors.mainColor)};
     color: ${({ theme }) => (theme.colors.textColor)};
+
+    border-bottom: 2px solid white;
 
     display: flex;
     justify-content: space-between;
