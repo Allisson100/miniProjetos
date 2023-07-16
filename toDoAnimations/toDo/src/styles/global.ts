@@ -4,6 +4,8 @@ export default createGlobalStyle `
     #root {
         width: 100%;
         height: 100vh;
+        background: linear-gradient(#030419 , #060732);
+        position: relative;
     }
 
     * {
