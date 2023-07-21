@@ -1,10 +1,10 @@
 const theme = {
     light: {
         colors: {
-            mainColor: '#0F99F1',
-            secundaryColor: '#116FE3',
-            thirColor: '#0CC2FF',
-            textColor: '#000000',
+            mainColor: '#116FE3',
+            secundaryColor: '#4B91E8',
+            thirColor: '#DBE6F5',
+            textColor: '#000',
         },
     },
 

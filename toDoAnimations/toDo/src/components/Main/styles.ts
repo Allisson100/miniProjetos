@@ -41,12 +41,17 @@ export const InputContainer = styled.input `
     width: 80%;
     height: 100%;
 
-    border: none;
+    border: 1px solid black;
     border-radius: 8px;
 
     font-size: 1.7rem;
 
     padding: 1rem;
+    transition: .1s;
+    
+    &:focus {
+        border: 2px solid black;
+    }
 `
 
 export const Button = styled.button<Props> `
