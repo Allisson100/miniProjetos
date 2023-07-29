@@ -146,3 +146,98 @@ Como podemos ver o valor dessa variável de Contexto ainda está estática, vamo
     export {SwitchContext , SwitchProvider}
 
 Eu apenas criei uma variável de estado com useState e coloquei essa função como value no Provider.
+
+### Alguns testes que fiz
+
+const [scroll, setScroll] = useState(false);
+const [scrollY, setScrollY] = useState(0);
+
+    const [elementY, setElementY] = useState(0);
+
+    const [startAnimation , setStartAnimation] = useState(false)
+
+    const { switchState , setSwitchState } = useContext(SwitchContext)
+    const { completeButtonState } = useContext(CompleteButtonContext)
+    const { positionElementState } = useContext(PositionElement)
+
+
+    function handleSwitchChange () {
+        setSwitchState(!switchState)
+    }
+
+    useEffect(() => {
+
+        if(completeButtonState) {
+            setStartAnimation(true)
+            document.body.style.overflow = 'hidden'
+        } else {
+            setStartAnimation(false)
+            document.body.style.overflow = 'auto'
+        }
+
+    }, [completeButtonState , scroll])
+
+    useEffect(() => {
+        if(startAnimation) {
+            setScroll(true)
+        } else {
+            setScroll(false)
+        }
+
+    }, [startAnimation])
+
+    useEffect(() => {
+        console.log("Scroll", scroll);
+
+        if(scroll) {
+            setElementY(((positionElementState.top - (positionElementState.height / 2) - 22) + scrollY))
+        } else {
+            setElementY((positionElementState.top - (positionElementState.height / 2) - 22))
+        }
+    }, [scroll , positionElementState.top , positionElementState.height , scrollY])
+
+    // const elementY: number = (scroll)?
+    //     ((positionElementState.top - (positionElementState.height / 2) - 22) + scrollY):    (positionElementState.top - (positionElementState.height / 2) - 22)
+
+    const elementX: number = (positionElementState.x + 5)
+
+    function handleScroll () {
+        setScrollY(window.scrollY)
+    }
+
+    useEffect(() => {
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+
+    }, []);
+
+    function animationEnd () {
+        document.body.style.overflow = 'auto'
+        setStartAnimation(!startAnimation)
+    }
+
+
+    useEffect(() => {
+        const pencilImageElement = document.getElementById('pencilImage')
+
+        if(pencilImageElement) {
+
+            pencilImageElement.addEventListener('animationend', animationEnd)
+
+            return () => {
+                pencilImageElement.removeEventListener('animationend', animationEnd)
+            }
+        }
+    },[])
+
+### O que fazer
+
+Criar animção para todos com 2 linha;
+
+Se for 1 linha, saber a quantidade de letra para saber o quanto para direita o lápis tem q ir.
+
+Utilizar lógica de riscar depois dar opacidade na div apenas quando a anaimação terminar.

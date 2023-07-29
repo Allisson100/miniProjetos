@@ -1,4 +1,8 @@
 import { SwitchProvider } from './switch'
+import { PositionElementProvider } from './positionElement'
+import { CompleteButtonStateProvider } from './completeButtonClicked'
+import { InputTextLengthProvider } from './inputTextLength'
+import { AnimationFinishedProvider } from './animationFinished'
 
 interface Props {
     children?: React.ReactNode;
@@ -7,7 +11,15 @@ interface Props {
 export default function ContextProvider({ children }: Props) {
     return (
         <SwitchProvider>
-            {children}
+            <PositionElementProvider>
+                <CompleteButtonStateProvider>
+                    <InputTextLengthProvider>
+                        <AnimationFinishedProvider>
+                            {children}
+                        </AnimationFinishedProvider>   
+                    </InputTextLengthProvider>
+                </CompleteButtonStateProvider>
+            </PositionElementProvider>
         </SwitchProvider>
     )
 }

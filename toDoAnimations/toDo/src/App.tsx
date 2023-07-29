@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import ContextProvider from './contexts/index'
 import Home from './pages/Home'
 import GlobalStyles from './styles/global'
@@ -12,14 +12,15 @@ function App() {
 
   const [switchSate , setSwitchSate] = useState(true)
 
-  function getSwitchState(value: boolean) {
+  // function getSwitchState(value: boolean) {
+  //   setSwitchSate(value)
+  // }
+
+  const getSwitchState = useCallback((value: boolean) => {
     setSwitchSate(value)
-  }
+  },[])
 
   const wTheme = switchSate ? 'dark' : 'light'
-
-  console.log(wTheme);
-  
 
   const newTheme: DefaultTheme = theme[wTheme]
 

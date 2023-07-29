@@ -3,6 +3,7 @@ import { styled } from 'styled-components'
 import { Props } from '../Navbar/styles'
 
 interface CardData {
+    $completed: boolean;
     theme: {
         colors: {
             mainColor: string;
@@ -11,7 +12,7 @@ interface CardData {
             textColor: string;
         }
     };
-    completed: boolean;
+    
 }
 
 export const Container = styled.main<Props> `
@@ -55,7 +56,7 @@ export const InputContainer = styled.input `
 `
 
 export const Button = styled.button<Props> `
-    width: 10%;
+    min-width: 10%;
     height: 100%;
 
     border-radius: 8px;
@@ -77,17 +78,19 @@ export const Button = styled.button<Props> `
     }
 `
 
+//CARD
+
 export const CardContainer = styled.div<CardData> `
     width: 90%;
 
     transition: .5s;
 
-    opacity: ${({completed}) => (completed ? 0.5 : 1)};
+    opacity: ${({$completed}) => (($completed) ? 0.5 : 1)};
     
-
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 
     color: ${({ theme }) => (theme.colors.textColor)};
     background-color: ${({ theme }) => (theme.colors.secundaryColor)};
@@ -100,16 +103,19 @@ export const CardContainer = styled.div<CardData> `
     border-radius: 8px;
 `
 
-export const CardText = styled.h2<CardData> `
+export const CardText = styled.p<CardData> `
     color: ${({ theme }) => (theme.colors.textColor)};
     font-size: 2rem;
-    text-decoration: ${({completed}) => (completed ? 'line-through' : 'none')};
+    text-decoration: ${({$completed}) => (($completed) ? 'line-through' : 'none')};
+
+    word-break: break-all;
 
 `
 
 export const CardButtonContainer = styled.div `
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
 
     width: auto;
     height: 100%;
