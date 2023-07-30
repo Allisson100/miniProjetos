@@ -234,10 +234,30 @@ const [scrollY, setScrollY] = useState(0);
         }
     },[])
 
-### O que fazer
+### O que falta fazer
 
-Criar animção para todos com 2 linha;
+- Lançar na Vercel
 
-Se for 1 linha, saber a quantidade de letra para saber o quanto para direita o lápis tem q ir.
+### Comentários
 
-Utilizar lógica de riscar depois dar opacidade na div apenas quando a anaimação terminar.
+Basicamente usei somente a COntext API para gerenciar o estado, foi bom para estudar.
+
+### Funções
+
+    const deleteToDo = useCallback((id: number) => {
+
+        setToDoList((prevTodos) => prevTodos.filter((todo) => todo.id !== id))
+    }, [])
+
+    const completeToDo = useCallback((id: number) => {
+
+        setTimeout(() => {
+            setToDoList((prevTodos) => prevTodos.map(
+                (todo) => todo.id !== id ? todo : {... todo, completed: !todo.completed}
+            ))
+        }, 2000)
+    }, [])
+
+Preciso estuda mais sobre a função .getBoundingClientRect() para futuros projetos.
+
+Estudar mais sobre os Temas.

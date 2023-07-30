@@ -6,15 +6,9 @@ import GlobalStyles from './styles/global'
 import theme from './styles/theme'
 import { ThemeProvider , DefaultTheme } from 'styled-components'
 
-
-
 function App() {
 
   const [switchSate , setSwitchSate] = useState(true)
-
-  // function getSwitchState(value: boolean) {
-  //   setSwitchSate(value)
-  // }
 
   const getSwitchState = useCallback((value: boolean) => {
     setSwitchSate(value)

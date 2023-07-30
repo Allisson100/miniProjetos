@@ -32,20 +32,17 @@ function Navbar () {
     const { eraserAnimationState , setEraserAnimationState } = useContext(EraserAnimationContext)
     
 
-    function handleSwitchChange () {
+    const handleSwitchChange = () => {
         setSwitchState(!switchState)        
     }    
 
     useEffect(() => {
-
         if(pencilAnimationState || eraserAnimationState) {
             document.body.style.overflow = 'hidden'
         }
-        
     }, [eraserAnimationState , pencilAnimationState])
 
     useEffect(() => {
-
         const buttons = document.querySelectorAll('button')
 
         if(pencilAnimationState || eraserAnimationState) {
@@ -61,19 +58,13 @@ function Navbar () {
 
 
     const animationEnd = useCallback(() => {
-
-        console.log('lapis');
         setPencilAnimationState(false)
         document.body.style.overflow = 'auto'
-        
     }, [setPencilAnimationState])
 
     const eraserAnimationEnd = useCallback(() => {
-
-        console.log('borracha');
         setEraserAnimationState(false)
-        document.body.style.overflow = 'auto'
-        
+        document.body.style.overflow = 'auto'        
     }, [setEraserAnimationState])
 
     useEffect(() => {
@@ -87,7 +78,6 @@ function Navbar () {
                 pencilImageElement.removeEventListener('animationend', animationEnd)
             }
         }
-
     },[animationEnd])
 
     useEffect(() => {
@@ -101,7 +91,6 @@ function Navbar () {
                 eraserImageElement.removeEventListener('animationend', eraserAnimationEnd)
             }
         }
-
     },[eraserAnimationEnd])
 
     useEffect(()=> {

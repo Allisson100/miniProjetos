@@ -18,13 +18,5 @@ const theme = {
     },
 }
 
-// OTHER COLROS
-
-// Dark
-    //#111595
-    //#161CC6
-
-// Light
-
 export default theme
 

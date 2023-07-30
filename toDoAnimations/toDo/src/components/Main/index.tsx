@@ -1,11 +1,13 @@
-import React , { useEffect, useState , useContext } from 'react'
-import { Container , InputButtonContainer , InputContainer, Button , CardContainer , CardButton , CardButtonContainer , CardText } from './styles'
+import React , { useEffect, useState , useContext, useCallback } from 'react'
+
+import { Container , InputButtonContainer , InputContainer, Button , } from './styles'
 
 import { PositionElement } from '../../contexts/positionElement'
 import { InputTextLengthContext } from '../../contexts/inputTextLength'
-
 import { PencilAnimationContext } from '../../contexts/pencilAnimation'
 import { EraserAnimationContext } from '../../contexts/eraserAnimation'
+
+import Card from '../Card'
 
 interface ToDoListData {
     id: number;
@@ -28,19 +30,16 @@ function Main () {
 
     const { setPositionElementState } = useContext(PositionElement)
     const { setInputTextLengthState } = useContext(InputTextLengthContext)   
-
     const { setPencilAnimationState } = useContext(PencilAnimationContext)
     const { setEraserAnimationState } = useContext(EraserAnimationContext)
 
     const [inputValue , setInputValue] = useState('')
+
     const [toDoList , setToDoList] = useState<ToDoListData[]>(() => {
-
         const storedToDoList = localStorage.getItem('@todoanimation:todolist')
-
         if(storedToDoList) {
             return JSON.parse(storedToDoList) as ToDoListData[]
         }
-
         return []
     })
 
@@ -48,50 +47,43 @@ function Main () {
         localStorage.setItem('@todoanimation:todolist' , JSON.stringify(toDoList))
     }, [toDoList])
 
-    function handleInputValue (e: React.ChangeEvent<HTMLInputElement>) {
+    const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value)
         if(e.target.value.length === 150) {
             alert('Limite de caracteres atingidos (150)')
         }
     }
 
-    function createNewCard () {
-
+    const createNewCard = () => {
         if(inputValue === '') {
             alert('Digite alguma coisa')
             return
         }
-
         const newCard: ToDoListData = {
             id: Math.random(),
             completed: false,
             text: inputValue
         }
-
         setToDoList((prevToDos) => [... prevToDos, newCard])
         setInputValue('')
     }
 
-    function deleteToDo (id: number) {
+    const deleteToDo = useCallback((id: number) => {
         setToDoList((prevTodos) => prevTodos.filter((todo) => todo.id !== id))
-    }
+    }, [])
 
-    function completeToDo (id: number) {
-         
+    const completeToDo = useCallback((id: number) => {
         setTimeout(() => {
             setToDoList((prevTodos) => prevTodos.map(
                 (todo) => todo.id !== id ? todo : {... todo, completed: !todo.completed}
             ))
         }, 2000)
-    }
+    }, [])
 
-    function getPosition (id: number, completed: boolean): void {
-
+    const getPosition = useCallback((id: number, completed: boolean) => {
         const element = document.getElementById(`${id}`)        
 
         if(element) {
-
-            // element.scrollIntoView()
             
             const rect: ElementRect = element.getBoundingClientRect()
 
@@ -116,9 +108,6 @@ function Main () {
                 }
             }
 
-
-            console.log(completed);
-
             if(completed) {
                 setPencilAnimationState(false)
                 setEraserAnimationState(true)
@@ -126,8 +115,18 @@ function Main () {
                 setPencilAnimationState(true)
                 setEraserAnimationState(false)
             }
-
         } 
+    },[
+        setPositionElementState,
+        setInputTextLengthState,
+        setPencilAnimationState,
+        setEraserAnimationState 
+    ])
+
+    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if(event.key === 'Enter') {
+            createNewCard()
+        }
     }
     
     return (
@@ -137,6 +136,7 @@ function Main () {
                     type="text" 
                     placeholder='Digite seus compromissos aqui !! (maximo 150 caracteres)'
                     onChange={handleInputValue}
+                    onKeyDown={handleKeyPress}
                     value={inputValue}
                     maxLength={150}
                 />
@@ -144,25 +144,13 @@ function Main () {
             </InputButtonContainer>
 
             {toDoList.map((todo) => (
-                <CardContainer 
-                    key={todo.id}  
-                    $completed={(todo.completed)}
-                >
-                    <CardText 
-                        $completed={(todo.completed)} 
-                        id={`${todo.id}`}
-                    >{todo.text}</CardText>
-                   
-                    <CardButtonContainer>
-                        <CardButton onClick={() => {completeToDo(todo.id); getPosition(todo.id, todo.completed)}}>
-                            {(todo.completed) ? 'Retomar' : 'Completar'}
-                        </CardButton>
-                        <CardButton onClick={() => {deleteToDo(todo.id)}}>Excluir</CardButton>
-                    </CardButtonContainer>
-                </CardContainer>
+                <Card 
+                    todo={todo}
+                    completeToDo={completeToDo}
+                    getPosition={getPosition}
+                    deleteToDo={deleteToDo}
+                />
             ))}
-
-            
         </Container>  
     )
 }
