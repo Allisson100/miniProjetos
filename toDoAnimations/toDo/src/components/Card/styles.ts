@@ -21,12 +21,17 @@ export const CardContainer = styled.div<CardData> `
     display: flex;
     flex-wrap: wrap;
     font-size: 2rem;
+    gap: 0.5rem;
     justify-content: space-between;
     margin-top: 1rem;
     opacity: ${({$completed}) => (($completed) ? 0.5 : 1)};
     padding: 2rem 1rem;
     transition: .5s;
     width: 90%;
+
+    @media screen and (max-width: 650px) {
+        width: 100%;
+    }
 `
 
 export const CardText = styled.p<CardData> `

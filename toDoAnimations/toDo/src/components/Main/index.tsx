@@ -145,6 +145,7 @@ function Main () {
 
             {toDoList.map((todo) => (
                 <Card 
+                    key={todo.id}
                     todo={todo}
                     completeToDo={completeToDo}
                     getPosition={getPosition}

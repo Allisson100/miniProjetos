@@ -24,7 +24,6 @@ function Card ({ todo , completeToDo , getPosition , deleteToDo }: Props ) {
 
     return (
         <CardContainer 
-            key={todo.id}  
             $completed={(todo.completed)}
         >
             <CardText 

@@ -10,6 +10,10 @@ export const Container = styled.main<Props> `
     min-height: calc(100% - 100px);
     padding: 1rem 2rem;
     width: 100%;
+
+    @media screen and (max-width: 650px) {
+        padding: 1rem 0.3rem;
+    }
 `
 
 export const InputButtonContainer = styled.div `
@@ -32,7 +36,7 @@ export const InputContainer = styled.input `
         border: 2px solid black;
     }
 
-    @media screen and (max-width: 460px){
+    @media screen and (max-width: 300px){
         width: 50%;
     }
 `
