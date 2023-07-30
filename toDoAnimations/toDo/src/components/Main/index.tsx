@@ -2,8 +2,10 @@ import React , { useEffect, useState , useContext } from 'react'
 import { Container , InputButtonContainer , InputContainer, Button , CardContainer , CardButton , CardButtonContainer , CardText } from './styles'
 
 import { PositionElement } from '../../contexts/positionElement'
-import { CompleteButtonContext } from '../../contexts/completeButtonClicked'
 import { InputTextLengthContext } from '../../contexts/inputTextLength'
+
+import { PencilAnimationContext } from '../../contexts/pencilAnimation'
+import { EraserAnimationContext } from '../../contexts/eraserAnimation'
 
 interface ToDoListData {
     id: number;
@@ -25,8 +27,10 @@ interface ElementRect {
 function Main () {
 
     const { setPositionElementState } = useContext(PositionElement)
-    const { setCompleteButtonState } = useContext(CompleteButtonContext)
     const { setInputTextLengthState } = useContext(InputTextLengthContext)   
+
+    const { setPencilAnimationState } = useContext(PencilAnimationContext)
+    const { setEraserAnimationState } = useContext(EraserAnimationContext)
 
     const [inputValue , setInputValue] = useState('')
     const [toDoList , setToDoList] = useState<ToDoListData[]>(() => {
@@ -38,7 +42,6 @@ function Main () {
         }
 
         return []
-
     })
 
     useEffect(()=>{
@@ -75,27 +78,18 @@ function Main () {
 
     function completeToDo (id: number) {
          
-        const card = toDoList.find((todo) => todo.id === id)       
-        const completedStatus = card?.completed
-        
-        if(completedStatus) {
+        setTimeout(() => {
             setToDoList((prevTodos) => prevTodos.map(
                 (todo) => todo.id !== id ? todo : {... todo, completed: !todo.completed}
             ))
-        } else {
-            setTimeout(() => {
-                setToDoList((prevTodos) => prevTodos.map(
-                    (todo) => todo.id !== id ? todo : {... todo, completed: !todo.completed}
-                ))
-            }, 2000)
-        }
+        }, 2000)
     }
 
     function getPosition (id: number, completed: boolean): void {
 
         const element = document.getElementById(`${id}`)        
 
-        if(element && completed === false) {
+        if(element) {
 
             // element.scrollIntoView()
             
@@ -113,14 +107,6 @@ function Main () {
             })            
             
             const textLength = element.textContent?.length     
-            
-            console.log(rect.width);
-            console.log(rect.height);
-            console.log(Math.floor(rect.height / 32));
-            
-
-            //Mesma linha botão e texto W:72 H:37
-            //Duas linhas text em uma botão em outra W:127 H:37
 
             if(typeof textLength === 'number') {
                 if(textLength > 70) {
@@ -129,12 +115,19 @@ function Main () {
                     setInputTextLengthState(textLength)
                 }
             }
-            setCompleteButtonState(true)
-        } 
 
-        if(completed === true) {
-            setCompleteButtonState(false)
-        }
+
+            console.log(completed);
+
+            if(completed) {
+                setPencilAnimationState(false)
+                setEraserAnimationState(true)
+            } else {
+                setPencilAnimationState(true)
+                setEraserAnimationState(false)
+            }
+
+        } 
     }
     
     return (

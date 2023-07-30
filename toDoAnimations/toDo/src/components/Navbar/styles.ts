@@ -21,10 +21,20 @@ interface AnimationData {
     $elementHeigth: number;
 }
 
+interface EraserAnimationData {
+    $startEraserAnimation: boolean;
+    $positionElementStateX: number;
+    $positionElementStateY: number;
+    $textLength: number;
+    $numbersLine: number;
+    $elementWidth: number;
+    $elementHeigth: number;
+}
+
 const pencilAnimationStart = (x: number , y: number , textLength: number , numbersLine: number, elementWidth: number , elementHeigth: number) => keyframes`
 
     0% {
-        left: 50%;
+        left: calc(0% + 125px);
         top: 0;
     }
 
@@ -43,9 +53,35 @@ const pencilAnimationStart = (x: number , y: number , textLength: number , numbe
     }
 
     100% {
-        left: 50%;
+        left: calc(0% + 125px);
         top: 0;
         transform: translate(-190deg);
+        scale: 1;
+    }
+`
+
+const eraserAnimationStart = (x: number , y: number , textLength: number , numbersLine: number, elementWidth: number , elementHeigth: number) => keyframes`
+
+    0% {
+        left: calc(0% + 125px + 15px);
+        top: 50px;
+    }
+
+    25% {
+        left: ${x - 10}px;
+        top: ${numbersLine === 3 ? `${y + 67 + 36}px` : numbersLine > 3 ? `${y + 67 + (16 * numbersLine) + (Math.floor(elementHeigth / 18))}px` : `${y + 67}px`};
+        scale: 2;
+    }
+
+    75% {
+        left: ${numbersLine > 1 ? `${elementWidth * 1.1}px` : `${x + (17 * textLength)}px`};
+        top: ${numbersLine === 3 ? `${y + 67 + 36}px` : numbersLine > 3 ? `${y + 67 + (16 * numbersLine) + (Math.floor(elementHeigth / 18))}px` : `${y + 67}px`};
+        scale: 2;
+    }
+
+    100% {
+        left: calc(0% + 125px + 15px);
+        top: 50px;
         scale: 1;
     }
 `
@@ -86,15 +122,26 @@ export const PencilImage = styled.img<AnimationData> `
     height: 100px;
     position: absolute;
     top: 0;
-    left: 50%;
+    left: calc(0% + 125px);
     animation: ${({ $startAnimation , $positionElementStateX , $positionElementStateY , $textLength , $numbersLine , $elementWidth , $elementHeigth}: AnimationData) => $startAnimation ? pencilAnimationStart($positionElementStateX , $positionElementStateY , $textLength , $numbersLine , $elementWidth , $elementHeigth) : 'none'} 2s linear;
     z-index: 10000;
 `
 
-export const EraserImage = styled.img `
+export const EraserImage = styled.img<EraserAnimationData> `
     width: 50px;
     height: 50px;
     position: absolute;
-    left: 53%;
-    top: 7%;
+    left: calc(0% + 125px + 15px);
+    top: 50px;
+    animation: ${({ $startEraserAnimation , $positionElementStateX , $positionElementStateY , $textLength , $numbersLine , $elementWidth , $elementHeigth}: EraserAnimationData) => $startEraserAnimation ? eraserAnimationStart($positionElementStateX , $positionElementStateY , $textLength , $numbersLine , $elementWidth , $elementHeigth) : 'none'} 2s linear;
+
+    z-index: 10000;
+`
+
+export const SwitchContainer = styled.div `
+    display: flex;
+
+    @media screen and (max-width: 350px){
+        display: none;
+    }
 `

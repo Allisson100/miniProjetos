@@ -36,6 +36,7 @@ export const InputButtonContainer = styled.div `
 
     display: flex;
     justify-content: center;
+    
 `
 
 export const InputContainer = styled.input `
@@ -52,6 +53,10 @@ export const InputContainer = styled.input `
     
     &:focus {
         border: 2px solid black;
+    }
+
+    @media screen and (max-width: 460px){
+        width: 50%;
     }
 `
 
